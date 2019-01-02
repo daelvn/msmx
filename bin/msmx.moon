@@ -1,6 +1,7 @@
 import Macro, expand from require "../lbuilder/macro"
 
 MacroLoadFile = require "../msmx/loadfile"
+MacroQStop = require "../msmx/qstop"
 
 class MSMX
   new: =>
@@ -22,5 +23,6 @@ class MSMX
 msmx = MSMX!
 
 msmx\addMacro MacroLoadFile
+msmx\addMacro MacroQStop
 
 print msmx\expandFile "tests/test.moon"
