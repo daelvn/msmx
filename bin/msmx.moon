@@ -1,28 +1,15 @@
-import Macro, expand from require "../lbuilder/macro"
+import Macro, expand_many from require "../lbuilder/macro"
 
-MacroLoadFile = require "../msmx/loadfile"
-MacroQStop = require "../msmx/qstop"
+macrol = {
+  require "msmx.loadfile"
+  require "msmx.qstop"
+}
 
-class MSMX
-  new: =>
-    @macros = {}
+expand_file = (filename) ->
+  f         = assert io.open filename, "r"
+  contents  = f\read "*all"
+  f\close!
 
-  addMacro: (macro) =>
-    table.insert @macros, macro
+  ((expand_many macrol) {}) contents
 
-  expandFile: (filename) =>
-    f = assert io.open filename, "r"
-    file_contents = f\read "*all"
-    f\close!
-
-    for M in *@macros
-      file_contents = ((expand M) {}) file_contents
-
-    return file_contents
-
-msmx = MSMX!
-
-msmx\addMacro MacroLoadFile
-msmx\addMacro MacroQStop
-
-print msmx\expandFile "tests/test.moon"
+print expand_file "tests/test.moon"

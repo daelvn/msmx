@@ -1,6 +1,5 @@
-require "msmx.symbols"
-
-import Macro from require "../lbuilder/macro"
+import id    from require "msmx.symbols"
+import Macro from require "lbuilder.macro"
 
 Macro "msmx/qstop"
   condition: "@!#{id}::#{id}"

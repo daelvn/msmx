@@ -1,5 +1,4 @@
-require "msmx.symbols"
-
+import id    from require "msmx.symbols"
 import Macro from require "../lbuilder/macro"
 
 Macro "msmx/loadfile"
