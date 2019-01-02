@@ -2,8 +2,25 @@ import Macro, expand from require "../lbuilder/macro"
 
 MacroLoadFile = require "../msmx/loadfile"
 
-code_forsign  = [[f <=< "test.txt"]]
+class MSMX
+  new: =>
+    @macros = {}
 
-x1 = ((expand MacroLoadFile) {}) code_forsign
+  addMacro: (macro) =>
+    table.insert @macros, macro
 
-print x1
+  expandFile: (filename) =>
+    f = assert io.open filename, "r"
+    file_contents = f\read "*all"
+    f\close!
+
+    for M in *@macros
+      file_contents = ((expand M) {}) file_contents
+
+    return file_contents
+
+msmx = MSMX!
+
+msmx\addMacro MacroLoadFile
+
+print msmx\expandFile "tests/test.moon"
