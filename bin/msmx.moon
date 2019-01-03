@@ -8,6 +8,7 @@ macrol = {
   require "msmx.loadfile"
   require "msmx.qstop"
   require "msmx.sign"
+  require "msmx.insert"
 }
 
 expand_file = (filename) ->
@@ -41,6 +42,11 @@ parse_arguments = (args) ->
     omacro = expand_file args["Input"]
     unless isarg(args, "Output")
       print omacro
+    else
+      f = io.open args["Output"], "w"
+      io.output f
+      io.write omacro
+      io.close f
 
 
 gargs = get_arguments args
