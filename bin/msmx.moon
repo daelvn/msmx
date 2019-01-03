@@ -20,8 +20,28 @@ expand_file = (filename) ->
 
   contents
 
-parse_arguments = (a) ->
-  if a[2]
-    return expand_file a[2]
+isarg = (args, name) ->
+  return args[name] and args[name] != "STANDALONE_FLAG"
 
-print parse_arguments args
+get_arguments = (a) ->
+  flags = {
+    "-o": "Output"
+    "-i": "Input"
+  }
+  out = {}
+  for i = 1, #a
+    for k, v in pairs(flags)
+      if a[i] == k
+        out[v] = a[i+1] or "STANDALONE_FLAG"
+  return out
+
+parse_arguments = (args) ->
+  omacro = nil
+  if isarg(args, "Input")
+    omacro = expand_file args["Input"]
+    unless isarg(args, "Output")
+      print omacro
+
+
+gargs = get_arguments args
+parse_arguments gargs
