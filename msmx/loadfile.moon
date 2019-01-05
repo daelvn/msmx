@@ -2,10 +2,9 @@
 -- MoonScript macro expansion system
 -- By daelvn, zeuêp (pancakeddd)
 -- 03.01.2019
-import id    from require "msmx.symbols"
-import Macro from require "../lbuilder/macro"
+import Macro from require "lbuilder.macro"
 
 Macro "msmx/loadfile"
-  condition: "@!#{id} <=< ?.+"
-  capture:   "@!(#{id}) <=< ?(.+)"
+  condition: [[@!\h*(.+?)\h*<=<\h*(.+?)(?=\h+if|\h+for|\h+--|$)]]
+  capture:   [[@!\h*(.+?)\h*<=<\h*(.+?)(?=\h+if|\h+for|\h+--|$)]]
   replace:   [[%1 = assert io.open %2, "r" ]]

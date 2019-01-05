@@ -3,11 +3,20 @@
 -- By daelvn, zeuêp (pancakeddd)
 -- 03.01.2019
 import Macro, expand_many, expand from require "lbuilder.macro"
-
 macrol = {
   require "msmx.loadfile"
-  require "msmx.qstop"
+  --require "msmx.qstop"
+  require "msmx.infix"
   require "msmx.sign"
+  require "msmx.apply"
+  require "msmx.import-simple"
+  require "msmx.import-all"
+  require "msmx.import-in"
+  require "msmx.compare-type"
+  require "msmx.nil-update"
+  require "msmx.ask"
+  require "msmx.negate"
+  require "msmx.block-comment"
 }
 
 expand_file = (filename) ->
@@ -43,5 +52,5 @@ parse_arguments = (args) ->
       print omacro
 
 
-gargs = get_arguments args
+gargs = get_arguments arg
 parse_arguments gargs

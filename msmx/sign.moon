@@ -5,6 +5,6 @@
 import Macro from require "lbuilder.macro"
 
 Macro "msmx/sign"
-  condition: [[@!(.+?)\s*::\s*(.+)]]
-  capture:   [[@!(.+?)\s*::\s*(.+)]]
+  condition: [[@!\h*(.+?)\h*::\h*(.+?)(?=\h*--|$)]]
+  capture:   [[@!\h*(.+?)\h*::\h*(.+?)(?=\h*--|$)]]
   replace:   [[%1 = sign "%2"]]
