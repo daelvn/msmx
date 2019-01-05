@@ -1,0 +1,28 @@
+Usage: msmx [-p] [-d <dir>] [-o <out>] [-h] <file> [<file>] ...
+       [-x [<disable>] ...]
+
+MoonScript Macro Expansion
+
+Arguments:
+
+  file                        A .msmx file
+
+Options:
+
+  -p, --print, --stdout       Writes to stdout
+
+           -d <dir>,          Directory to place compiled files
+        --dir <dir>,
+  --directory <dir>,
+       --path <dir>
+
+        -o <out>,             Write output to file
+     --out <out>,
+  --output <out>
+
+         -x [<disable>] ...,  Disables a macro
+  --disable [<disable>] ...
+
+  -h, --help                  Show this help message and exit.
+
+https://github.com/daelvn/msmx

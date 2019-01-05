@@ -2,7 +2,9 @@
 -- MoonScript macro expansion system
 -- By daelvn, zeuêp (pancakeddd)
 -- 03.01.2019
-import Macro, expand_many, expand from require "lbuilder.macro"
+import Macro, expand from require "lbuilder.macro"
+argparse                = require "argparse"
+
 macrol = {
   require "msmx.loadfile"
   --require "msmx.qstop"
@@ -16,41 +18,70 @@ macrol = {
   require "msmx.nil-update"
   require "msmx.ask"
   require "msmx.negate"
-  require "msmx.block-comment"
 }
 
-expand_file = (filename) ->
+get_path  = (s) -> s\match "(.+/).+"
+get_name  = (s) -> s\match ".+/(.+)"
+get_ext   = (s) -> s\match ".+/%.(.+)"
+get_noext = (s) -> s\match ".+/(.+)%..+"
+
+expand_file = (filename, disablel) ->
   f         = assert io.open filename, "r"
   contents  = f\read "*all"
   f\close!
-  
   for macro in *macrol
+    docont = false
+    for mn in *disablel
+      if macro.name == mn then
+        docont = true
+    if docont then continue
     contents = ((expand macro) {}) contents
-
   contents
 
-isarg = (args, name) ->
-  return args[name] and args[name] != "STANDALONE_FLAG"
+local argl
+with argparse!
+  \name "msmx"
+  \description "MoonScript Macro Expansion"
+  \epilog "https://github.com/daelvn/msmx"
 
-get_arguments = (a) ->
-  flags = {
-    "-o": "Output"
-    "-i": "Input"
-  }
-  out = {}
-  for i = 1, #a
-    for k, v in pairs(flags)
-      if a[i] == k
-        out[v] = a[i+1] or "STANDALONE_FLAG"
-  return out
+  \help_usage_margin 2
+  \help_description_margin 30
+  \help_vertical_space 1
 
-parse_arguments = (args) ->
-  omacro = nil
-  if isarg(args, "Input")
-    omacro = expand_file args["Input"]
-    unless isarg(args, "Output")
-      print omacro
+  with \flag "-p --print --stdout"
+    \description "Writes to stdout"
+    \target "print"
 
+  with \option "-d --dir --directory --path"
+    \description "Directory to place compiled files"
+    \args 1
+    \target "path"
 
-gargs = get_arguments arg
-parse_arguments gargs
+  with \option "-o --out --output"
+    \description "Write output to file"
+    \args 1
+    \target "output"
+
+  with \option "-x --disable"
+    \description "Disables a macro"
+    \args "*"
+    \default {}
+
+  with \argument "file"
+    \description "A .msmx file"
+    \args "+"
+
+  argl = \parse!
+
+for file in *argl.file
+  cont = expand_file file, argl.disable
+  if argl.print
+    io.write cont
+  elseif argl.path
+    with io.open "#{argl.path}/#{get_noext file}.moon", "w"
+      \write cont
+      \close!
+  else
+    with io.open (argl.output or "#{get_path file}#{get_noext file}.moon"), "w"
+      \write cont
+      \close!
