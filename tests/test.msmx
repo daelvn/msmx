@@ -1,3 +1,5 @@
+{-# LANGUAGE Signatures #-}
+{-# LANGUAGE IndexableStrings #-}
 a <=< "test"
 
 f :: string -> table
@@ -15,7 +17,10 @@ A <$> B
 
 import * from require "ltypekit" as ltypekit
 import a, b, c in ltypekit
-import ltypekit.type
+import ltypekit
+import ltypekit.type as ltype
+import std/io
+import std/Math
 
 isParser = (p) -> p === Parser
 ns.c[1] !== Parser
