@@ -10,6 +10,7 @@ macrol = {
   require "msmx.loadfile"
   --require "msmx.qstop"
   require "msmx.infix"
+  require "msmx.oversign"
   require "msmx.sign"
   require "msmx.apply"
   require "msmx.import-std"
@@ -21,6 +22,7 @@ macrol = {
   require "msmx.nil-update"
   require "msmx.ask"
   require "msmx.negate"
+  require "msmx.where"
 }
 
 get_path  = (s) -> s\match "(.+/).+"
@@ -84,7 +86,9 @@ for file in *argl.file
     with io.open "#{argl.path}/#{get_noext file}.moon", "w"
       \write cont
       \close!
+    print "Built file #{argl.path}/#{get_noext file}.moon"
   else
     with io.open (argl.output or "#{get_path file}#{get_noext file}.moon"), "w"
       \write cont
       \close!
+    print "Built file #{argl.output or "#{get_path file}#{get_noext file}.moon"}"

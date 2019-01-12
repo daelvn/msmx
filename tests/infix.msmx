@@ -1,0 +1,5 @@
+f <sum> x if y
+f (a,b) -> f <sum> x if y
+a = f <sum> x if y
+f (x, y) f <sum> x if y
+then f <sum> x if y "[#{set}]"

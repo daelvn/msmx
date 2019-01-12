@@ -22,9 +22,9 @@ Macro "msmx/import-std"
     " running: corunning, isyieldable: isYieldable} "                      ..
     "= coroutine"
 
-    "{:gethook, :getinfo, :getlocal, getmetatable: _getmetatable, :getregistry,"    ..
-    " :getupvalue, :getuservalue, :sethook, :setlocal, :setmetatable, :setupvalue," ..
-    " :setuservalue, :traceback, :upvalueid, :upvaluejoin} "                        ..
+    "{:gethook, :getinfo, :getlocal, getmetatable: _getmetatable, :getregistry,"     ..
+    " :getupvalue, :getuservalue, :sethook, :setlocal, setmetatable: _setmetatable," ..
+    " :setupvalue, :setuservalue, :traceback, :upvalueid, :upvaluejoin} "            ..
     "= debug"
 
     "{close: closeIO, flush: flushIO, input: inputIO, lines: linesIO, open: openIO,"      ..
