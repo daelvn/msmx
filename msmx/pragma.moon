@@ -9,6 +9,8 @@ Macro "msmx/pragma"
   capture:   {
     [[@!{-#\h+LANGUAGE Types\h+#-}]]
     [[@!{-#\h+LANGUAGE NoTypes\h+#-}]]
+    [[@!{-#\h+LANGUAGE DataTypes\h+#-}]]
+    [[@!{-#\h+LANGUAGE NoDataTypes\h+#-}]]
     [[@!{-#\h+LANGUAGE Signatures\h+#-}]]
     [[@!{-#\h+LANGUAGE NoSignatures\h+#-}]]
     [[@!{-#\h+LANGUAGE IndexableStrings\h+#-}]]
@@ -16,6 +18,9 @@ Macro "msmx/pragma"
   }
   replace:   {
     [[import typeof from require "ltypekit.type"]]
+    [[typeof = nil]]
+    [[import typeE, data, metatype from require "ltypekit.type"]]
+    [[typeE, data, metatype = nil, nil, nil]]
     [[typeof = nil]]
     [[import sign from require "ltypekit"]]
     [[sign = nil]]

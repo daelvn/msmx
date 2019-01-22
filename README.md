@@ -195,6 +195,12 @@ Syntax: `{-# KEYWORD Argument #-}`
 `import typeof from require "ltypekit.type"`
 ##### NoTypes
 `typeof = nil`
+##### DataTypes
+> Uses ltypekit6.1
+
+`import typeE, data, metatype from require "ltypekit.type"`
+##### NoDataTypes
+`typeE, data, metatype = nil, nil, nil`
 ##### Signatures
 > Uses ltypekit6
 
@@ -225,4 +231,14 @@ turns into
 ```moon
 fncall x, (...) ->
   return y
+```
+### which
+```moon
+data Char which
+  name: "Char"
+```
+turns into
+```moon
+data Char,
+  name: "Char"
 ```

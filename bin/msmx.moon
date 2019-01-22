@@ -23,6 +23,7 @@ macrol = {
   require "msmx.ask"
   require "msmx.negate"
   require "msmx.where"
+  require "msmx.which"
 }
 
 get_path  = (s) -> s\match "(.+/).+"
